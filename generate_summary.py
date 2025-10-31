@@ -82,8 +82,7 @@ def parse_filename(filename):
                 metadata['model'] = 'Vivaro Combi'
             else:
                 metadata['model'] = 'Vivaro'
-        
-        if 'ZAFIRA' in basename.upper():
+        elif 'ZAFIRA' in basename.upper():
             metadata['model'] = 'Zafira Life'
     
     # Peugeot Expert
