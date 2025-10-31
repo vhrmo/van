@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """
 Generate HTML summary of price lists from the cenniky folder.
-Groups by make, validity start, models and base prices.
+Groups by manufacturer, model, and validity start date.
 """
 
-import os
 import re
 from datetime import datetime
 from pathlib import Path
@@ -55,17 +54,17 @@ def parse_filename(filename):
             metadata['model_year'] = mj_match.group(1)
         
         # Extract validity date (various formats)
-        # Format: DDMMYYYY
-        date_match = re.search(r'(\d{2})(\d{2})(\d{4})', basename)
-        if date_match:
-            day, month, year = date_match.groups()
-            metadata['validity_date'] = f"{year}-{month}-{day}"
-        
-        # Format: D.M.YYYY
+        # Format: D.M.YYYY or DD.MM.YYYY (try this first as it's more specific with the dots)
         date_match2 = re.search(r'(\d{1,2})\.(\d{1,2})\.(\d{4})', basename)
         if date_match2:
             day, month, year = date_match2.groups()
             metadata['validity_date'] = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+        else:
+            # Format: DDMMYYYY (only if no dotted date found)
+            date_match = re.search(r'(\d{2})(\d{2})(\d{4})', basename)
+            if date_match:
+                day, month, year = date_match.groups()
+                metadata['validity_date'] = f"{year}-{month}-{day}"
     
     # Ford models
     elif 'FORD' in basename.upper() or 'TRANSIT' in basename.upper():
