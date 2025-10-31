@@ -59,19 +59,13 @@ def parse_filename(filename):
         date_match = re.search(r'(\d{2})(\d{2})(\d{4})', basename)
         if date_match:
             day, month, year = date_match.groups()
-            try:
-                metadata['validity_date'] = f"{year}-{month}-{day}"
-            except:
-                pass
+            metadata['validity_date'] = f"{year}-{month}-{day}"
         
         # Format: D.M.YYYY
         date_match2 = re.search(r'(\d{1,2})\.(\d{1,2})\.(\d{4})', basename)
         if date_match2:
             day, month, year = date_match2.groups()
-            try:
-                metadata['validity_date'] = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
-            except:
-                pass
+            metadata['validity_date'] = f"{year}-{month.zfill(2)}-{day.zfill(2)}"
     
     # Ford models
     elif 'FORD' in basename.upper() or 'TRANSIT' in basename.upper():
@@ -337,7 +331,7 @@ def generate_html(grouped_data, output_path):
 """
     
     # Calculate statistics
-    total_files = sum(len(models_dict) for models_dict in grouped_data.values() for models_dict in models_dict.values())
+    total_files = sum(len(price_lists) for models_dict in grouped_data.values() for price_lists in models_dict.values())
     total_makes = len(grouped_data)
     total_models = sum(len(models_dict) for models_dict in grouped_data.values())
     
@@ -395,7 +389,7 @@ def generate_html(grouped_data, output_path):
                         date_obj = datetime.strptime(pl['validity_date'], '%Y-%m-%d')
                         formatted_date = date_obj.strftime('%d.%m.%Y')
                         html += f'                            <span class="badge date">Valid from {formatted_date}</span>\n'
-                    except:
+                    except ValueError:
                         html += f'                            <span class="badge date">{pl["validity_date"]}</span>\n'
                 
                 html += f'                        </div>\n'
