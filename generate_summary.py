@@ -1,13 +1,109 @@
 #!/usr/bin/env python3
 """
 Generate HTML summary of price lists from the cenniky folder.
-Groups by manufacturer, model, and validity start date.
+Parses PDF content to extract manufacturer, model, base prices, and validity dates.
 """
 
 import re
 from datetime import datetime
 from pathlib import Path
 from collections import defaultdict
+
+try:
+    import pypdf
+    PDF_PARSING_AVAILABLE = True
+except ImportError:
+    PDF_PARSING_AVAILABLE = False
+    print("Warning: pypdf not installed. Run: pip install pypdf")
+
+
+def extract_pdf_text(pdf_path, max_pages=5):
+    """Extract text from first few pages of PDF."""
+    if not PDF_PARSING_AVAILABLE:
+        return ""
+    
+    try:
+        reader = pypdf.PdfReader(pdf_path)
+        text = ""
+        for i in range(min(max_pages, len(reader.pages))):
+            text += reader.pages[i].extract_text() + "\n"
+        return text
+    except Exception as e:
+        print(f"Error reading {pdf_path}: {e}")
+        return ""
+
+
+def extract_prices_from_text(text):
+    """
+    Extract base prices from PDF text.
+    Looks for patterns like "25 600 €", "47 900 €", etc.
+    """
+    prices = []
+    
+    # Pattern for prices: numbers with optional spaces/periods, followed by €
+    # Common formats: "25 600 €", "47.900 €", "25600€", etc.
+    price_patterns = [
+        r'(\d[\d\s.]*\d)\s*€\s*bez\s*DPH',  # "25 600 € bez DPH"
+        r'(\d[\d\s.]*\d)\s*€(?!\s*s\s*DPH)',  # "25 600 €" but not "€ s DPH"
+    ]
+    
+    for pattern in price_patterns:
+        matches = re.finditer(pattern, text, re.IGNORECASE)
+        for match in matches:
+            price_str = match.group(1)
+            # Remove spaces and dots used as thousand separators
+            price_str = price_str.replace(' ', '').replace('.', '')
+            try:
+                price = int(price_str)
+                # Only consider reasonable prices (between 10k and 150k euros)
+                if 10000 <= price <= 150000:
+                    prices.append(price)
+            except ValueError:
+                continue
+    
+    # Remove duplicates and sort
+    prices = sorted(set(prices))
+    return prices
+
+
+def extract_variants_from_text(text):
+    """Extract model variants from PDF text."""
+    variants = []
+    
+    # Common variant keywords
+    variant_patterns = [
+        r'\b(Active|Comfort|Premium|Luxury|Sport|Base)\b',
+        r'\b(Beach|Coast|Ocean|Edition)\b',
+        r'\b(Van|Combi|Kombi|Furgon|Traveller|Crew\s*Van|Crew\s*Cab)\b',
+        r'\b(Short|Long|Extra\s*Long|L[123]H[123])\b',
+    ]
+    
+    for pattern in variant_patterns:
+        matches = re.finditer(pattern, text, re.IGNORECASE)
+        for match in matches:
+            variant = match.group(1)
+            if variant not in variants:
+                variants.append(variant)
+    
+    return variants[:5]  # Limit to first 5 unique variants
+
+
+def parse_pdf_content(pdf_path):
+    """
+    Parse PDF content to extract pricing and variant information.
+    Returns dict with extracted data.
+    """
+    text = extract_pdf_text(pdf_path, max_pages=5)
+    
+    prices = extract_prices_from_text(text)
+    variants = extract_variants_from_text(text)
+    
+    return {
+        'prices': prices,
+        'variants': variants,
+        'base_price': prices[0] if prices else None,
+        'price_range': f"{prices[0]:,} - {prices[-1]:,} €" if len(prices) > 1 else (f"{prices[0]:,} €" if prices else None)
+    }
 
 
 def parse_filename(filename):
@@ -119,21 +215,6 @@ def parse_filename(filename):
         metadata['model'] = 'SpaceTourer'
     
     return metadata
-
-
-def group_price_lists(pdf_files):
-    """
-    Group price lists by make and then by model.
-    """
-    grouped = defaultdict(lambda: defaultdict(list))
-    
-    for pdf_file in pdf_files:
-        metadata = parse_filename(pdf_file)
-        make = metadata['make']
-        model = metadata['model']
-        grouped[make][model].append(metadata)
-    
-    return grouped
 
 
 def generate_html(grouped_data, output_path):
@@ -284,6 +365,12 @@ def generate_html(grouped_data, output_path):
             color: #e65100;
         }
         
+        .badge.price {
+            background: #f3e5f5;
+            color: #6a1b9a;
+            font-weight: 600;
+        }
+        
         .footer {
             margin-top: 40px;
             padding-top: 20px;
@@ -375,6 +462,12 @@ def generate_html(grouped_data, output_path):
                 html += f'                        <a href="../cenniky/{Path(pl["filename"]).name}" class="price-list-link" target="_blank">{pl["basename"]}</a>\n'
                 html += f'                        <div class="metadata">\n'
                 
+                # Display base price if available
+                if pl.get('base_price'):
+                    html += f'                            <span class="badge price">From {pl["base_price"]:,} €</span>\n'
+                elif pl.get('price_range'):
+                    html += f'                            <span class="badge price">{pl["price_range"]}</span>\n'
+                
                 if pl['model_year']:
                     html += f'                            <span class="badge year">MY {pl["model_year"]}</span>\n'
                 
@@ -432,9 +525,35 @@ def main():
     
     print(f"Found {len(pdf_files)} PDF files")
     
-    # Parse and group files
-    pdf_filenames = [str(pdf.relative_to(repo_root)) for pdf in pdf_files]
-    grouped_data = group_price_lists(pdf_filenames)
+    if not PDF_PARSING_AVAILABLE:
+        print("Warning: PDF parsing not available. Install pypdf: pip install pypdf")
+        print("Generating summary with filename-based information only...")
+    
+    # Parse files (both filename and content)
+    all_metadata = []
+    for i, pdf_file in enumerate(pdf_files, 1):
+        print(f"Processing ({i}/{len(pdf_files)}): {pdf_file.name}")
+        
+        # Parse filename
+        relative_path = str(pdf_file.relative_to(repo_root))
+        metadata = parse_filename(relative_path)
+        
+        # Parse PDF content for prices and variants
+        if PDF_PARSING_AVAILABLE:
+            try:
+                pdf_content = parse_pdf_content(pdf_file)
+                metadata.update(pdf_content)
+            except Exception as e:
+                print(f"  Warning: Could not parse PDF content: {e}")
+        
+        all_metadata.append(metadata)
+    
+    # Group by make and model
+    grouped_data = defaultdict(lambda: defaultdict(list))
+    for metadata in all_metadata:
+        make = metadata['make']
+        model = metadata['model']
+        grouped_data[make][model].append(metadata)
     
     # Create docs folder
     docs_path = repo_root / 'docs'
