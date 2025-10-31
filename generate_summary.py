@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-Generate HTML summary of price lists from the cenniky folder.
+Generate JSON data and Vue.js HTML summary of price lists from the cenniky folder.
 Parses PDF content to extract manufacturer, model, base prices, and validity dates.
 """
 
 import re
+import json
 from datetime import datetime
 from pathlib import Path
 from collections import defaultdict
@@ -510,6 +511,440 @@ def generate_html(grouped_data, output_path):
     print(f"HTML summary generated: {output_path}")
 
 
+def generate_json_data(grouped_data, output_path):
+    """
+    Generate JSON data file for use with Vue.js.
+    """
+    # Convert defaultdict to regular dict for JSON serialization
+    json_data = {
+        'manufacturers': []
+    }
+    
+    # Sort makes alphabetically
+    for make in sorted(grouped_data.keys()):
+        make_data = {
+            'name': make,
+            'models': []
+        }
+        
+        # Sort models alphabetically
+        for model in sorted(grouped_data[make].keys()):
+            price_lists = grouped_data[make][model]
+            
+            # Sort by validity date (newest first), then by model year
+            price_lists.sort(key=lambda x: (
+                x['validity_date'] or '0000-00-00',
+                x['model_year'] or '0000'
+            ), reverse=True)
+            
+            model_data = {
+                'name': model,
+                'priceLists': []
+            }
+            
+            for pl in price_lists:
+                price_list_data = {
+                    'filename': Path(pl['filename']).name,
+                    'basename': pl['basename'],
+                    'basePrice': pl.get('base_price'),
+                    'priceRange': pl.get('price_range'),
+                    'modelYear': pl.get('model_year'),
+                    'variant': pl.get('variant'),
+                    'validityDate': pl.get('validity_date'),
+                    'prices': pl.get('prices', []),
+                    'variants': pl.get('variants', [])
+                }
+                model_data['priceLists'].append(price_list_data)
+            
+            make_data['models'].append(model_data)
+        
+        json_data['manufacturers'].append(make_data)
+    
+    # Add statistics
+    json_data['stats'] = {
+        'totalManufacturers': len(grouped_data),
+        'totalModels': sum(len(models) for models in grouped_data.values()),
+        'totalPriceLists': sum(len(price_lists) for models_dict in grouped_data.values() for price_lists in models_dict.values())
+    }
+    
+    # Write JSON file
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(json_data, f, indent=2, ensure_ascii=False)
+    
+    print(f"JSON data generated: {output_path}")
+
+
+def generate_vue_html(output_path):
+    """
+    Generate JavaScript-based HTML page that loads data from JSON.
+    Uses vanilla JavaScript instead of Vue.js to avoid CDN dependency issues.
+    """
+    html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Van Price Lists Summary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #e74c3c;
+            font-size: 1.2em;
+        }
+        
+        .stats {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+        
+        .stat-item {
+            flex: 1;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .make-section {
+            margin-bottom: 40px;
+        }
+        
+        .make-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .model-group {
+            margin-bottom: 25px;
+            background: #fafafa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            border-radius: 4px;
+        }
+        
+        .model-title {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .price-list {
+            list-style: none;
+        }
+        
+        .price-list-item {
+            background: white;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .price-list-item:hover {
+            border-color: #3498db;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .price-list-link {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            flex-grow: 1;
+        }
+        
+        .price-list-link:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        .metadata {
+            display: flex;
+            gap: 15px;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            background: #ecf0f1;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .badge.price {
+            background: #f3e5f5;
+            color: #6a1b9a;
+            font-weight: 600;
+        }
+        
+        .badge.year {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .badge.variant {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .badge.date {
+            background: #fff3e0;
+            color: #e65100;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ecf0f1;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Van Price Lists Summary</h1>
+        <p class="subtitle">Complete overview of all available price lists organized by manufacturer and model</p>
+        
+        <div id="loading" class="loading">
+            Loading price lists...
+        </div>
+        
+        <div id="error" class="error hidden">
+        </div>
+        
+        <div id="content" class="hidden">
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="stat-manufacturers">0</div>
+                    <div class="stat-label">Manufacturers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="stat-models">0</div>
+                    <div class="stat-label">Models</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="stat-pricelists">0</div>
+                    <div class="stat-label">Price Lists</div>
+                </div>
+            </div>
+            
+            <div id="manufacturers-container"></div>
+            
+            <div class="footer">
+                <p>Generated on <span id="generation-date"></span></p>
+                <p>This page lists all available van price lists from the cenniky folder.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Format price with thousand separators
+        function formatPrice(price) {
+            return price.toLocaleString('en-US');
+        }
+        
+        // Format date from YYYY-MM-DD to DD.MM.YYYY
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            try {
+                const [year, month, day] = dateStr.split('-');
+                return `${day}.${month}.${year}`;
+            } catch {
+                return dateStr;
+            }
+        }
+        
+        // Create badge HTML
+        function createBadge(className, text) {
+            return `<span class="badge ${className}">${text}</span>`;
+        }
+        
+        // Render the price lists
+        function renderPriceLists(data) {
+            const container = document.getElementById('manufacturers-container');
+            let html = '';
+            
+            data.manufacturers.forEach(manufacturer => {
+                html += `<div class="make-section">`;
+                html += `<div class="make-header">${manufacturer.name}</div>`;
+                
+                manufacturer.models.forEach(model => {
+                    html += `<div class="model-group">`;
+                    html += `<div class="model-title">${model.name}</div>`;
+                    html += `<ul class="price-list">`;
+                    
+                    model.priceLists.forEach(priceList => {
+                        html += `<li class="price-list-item">`;
+                        html += `<a href="../cenniky/${priceList.filename}" class="price-list-link" target="_blank">${priceList.basename}</a>`;
+                        html += `<div class="metadata">`;
+                        
+                        if (priceList.basePrice) {
+                            html += createBadge('price', `From ${formatPrice(priceList.basePrice)} €`);
+                        } else if (priceList.priceRange) {
+                            html += createBadge('price', priceList.priceRange);
+                        }
+                        
+                        if (priceList.modelYear) {
+                            html += createBadge('year', `MY ${priceList.modelYear}`);
+                        }
+                        
+                        if (priceList.variant) {
+                            html += createBadge('variant', priceList.variant);
+                        }
+                        
+                        if (priceList.validityDate) {
+                            html += createBadge('date', `Valid from ${formatDate(priceList.validityDate)}`);
+                        }
+                        
+                        html += `</div>`;
+                        html += `</li>`;
+                    });
+                    
+                    html += `</ul>`;
+                    html += `</div>`;
+                });
+                
+                html += `</div>`;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        // Load data from JSON file
+        async function loadData() {
+            try {
+                const response = await fetch('data.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load data');
+                }
+                const data = await response.json();
+                
+                // Update statistics
+                document.getElementById('stat-manufacturers').textContent = data.stats.totalManufacturers;
+                document.getElementById('stat-models').textContent = data.stats.totalModels;
+                document.getElementById('stat-pricelists').textContent = data.stats.totalPriceLists;
+                
+                // Update generation date
+                const now = new Date();
+                document.getElementById('generation-date').textContent = now.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                // Render price lists
+                renderPriceLists(data);
+                
+                // Show content, hide loading
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('content').classList.remove('hidden');
+                
+            } catch (err) {
+                document.getElementById('loading').classList.add('hidden');
+                const errorDiv = document.getElementById('error');
+                errorDiv.textContent = 'Error loading price list data: ' + err.message;
+                errorDiv.classList.remove('hidden');
+            }
+        }
+        
+        // Load data when page is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadData);
+        } else {
+            loadData();
+        }
+    </script>
+</body>
+</html>
+"""
+    
+    # Write HTML file
+    with open(output_path, 'w', encoding='utf-8') as f:
+        f.write(html)
+    
+    print(f"JavaScript HTML generated: {output_path}")
+
+
 def main():
     """Main function to generate the summary."""
     # Get repository root
@@ -559,14 +994,24 @@ def main():
     docs_path = repo_root / 'docs'
     docs_path.mkdir(exist_ok=True)
     
-    # Generate HTML
-    output_file = docs_path / 'index.html'
-    generate_html(grouped_data, output_file)
+    # Generate JSON data file
+    json_output_file = docs_path / 'data.json'
+    generate_json_data(grouped_data, json_output_file)
+    
+    # Generate JavaScript-based HTML page
+    js_output_file = docs_path / 'index.html'
+    generate_vue_html(js_output_file)
+    
+    # Also keep the old server-rendered HTML for comparison
+    old_html_file = docs_path / 'index-static.html'
+    generate_html(grouped_data, old_html_file)
     
     print(f"\nSummary:")
     print(f"  Total manufacturers: {len(grouped_data)}")
     print(f"  Total models: {sum(len(models) for models in grouped_data.values())}")
-    print(f"  Output file: {output_file}")
+    print(f"  JSON data: {json_output_file}")
+    print(f"  JavaScript HTML: {js_output_file}")
+    print(f"  Static HTML: {old_html_file}")
 
 
 if __name__ == '__main__':

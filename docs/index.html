@@ -42,6 +42,47 @@
             font-size: 1.1em;
         }
         
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #e74c3c;
+            font-size: 1.2em;
+        }
+        
+        .stats {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+        
+        .stat-item {
+            flex: 1;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
         .make-section {
             margin-bottom: 40px;
         }
@@ -111,12 +152,7 @@
             gap: 15px;
             color: #7f8c8d;
             font-size: 0.9em;
-        }
-        
-        .metadata-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            flex-wrap: wrap;
         }
         
         .badge {
@@ -125,6 +161,13 @@
             border-radius: 12px;
             font-size: 0.85em;
             font-weight: 500;
+            white-space: nowrap;
+        }
+        
+        .badge.price {
+            background: #f3e5f5;
+            color: #6a1b9a;
+            font-weight: 600;
         }
         
         .badge.year {
@@ -142,12 +185,6 @@
             color: #e65100;
         }
         
-        .badge.price {
-            background: #f3e5f5;
-            color: #6a1b9a;
-            font-weight: 600;
-        }
-        
         .footer {
             margin-top: 40px;
             padding-top: 20px;
@@ -157,31 +194,8 @@
             font-size: 0.9em;
         }
         
-        .stats {
-            background: #ecf0f1;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-around;
-            text-align: center;
-        }
-        
-        .stat-item {
-            flex: 1;
-        }
-        
-        .stat-number {
-            font-size: 2em;
-            font-weight: bold;
-            color: #3498db;
-        }
-        
-        .stat-label {
-            color: #7f8c8d;
-            font-size: 0.9em;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -190,280 +204,154 @@
         <h1>Van Price Lists Summary</h1>
         <p class="subtitle">Complete overview of all available price lists organized by manufacturer and model</p>
         
-        <div class="stats">
-            <div class="stat-item">
-                <div class="stat-number">6</div>
-                <div class="stat-label">Manufacturers</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">13</div>
-                <div class="stat-label">Models</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">23</div>
-                <div class="stat-label">Price Lists</div>
-            </div>
+        <div id="loading" class="loading">
+            Loading price lists...
         </div>
         
-        <div class="make-section">
-            <div class="make-header">Citroën</div>
-            <div class="model-group">
-                <div class="model-title">SpaceTourer</div>
-                <ul class="price-list">
-                    <li class="price-list-item">
-                        <a href="../cenniky/citroen_space_tourer.pdf" class="price-list-link" target="_blank">citroen_space_tourer</a>
-                        <div class="metadata">
-                            <span class="badge price">From 35,490 €</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="make-section">
-            <div class="make-header">Ford</div>
-            <div class="model-group">
-                <div class="model-title">Transit Custom</div>
-                <ul class="price-list">
-                    <li class="price-list-item">
-                        <a href="../cenniky/Ford Transit Custom.pdf" class="price-list-link" target="_blank">Ford Transit Custom</a>
-                        <div class="metadata">
-                            <span class="badge price">From 30,790 €</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="make-section">
-            <div class="make-header">Opel</div>
-            <div class="model-group">
-                <div class="model-title">Vivaro Combi</div>
-                <ul class="price-list">
-                    <li class="price-list-item">
-                        <a href="../cenniky/SK_Zafira_Vivaro_Combi.pdf" class="price-list-link" target="_blank">SK_Zafira_Vivaro_Combi</a>
-                        <div class="metadata">
-                            <span class="badge price">From 37,990 €</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="model-group">
-                <div class="model-title">Vivaro Van</div>
-                <ul class="price-list">
-                    <li class="price-list-item">
-                        <a href="../cenniky/SK_Vivaro_VAN_CrewVan.pdf" class="price-list-link" target="_blank">SK_Vivaro_VAN_CrewVan</a>
-                        <div class="metadata">
-                            <span class="badge price">From 22,820 €</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="make-section">
-            <div class="make-header">Peugeot</div>
-            <div class="model-group">
-                <div class="model-title">Expert Combi/Traveller</div>
-                <ul class="price-list">
-                    <li class="price-list-item">
-                        <a href="../cenniky/cennik-expert-combi-traveller.pdf" class="price-list-link" target="_blank">cennik-expert-combi-traveller</a>
-                        <div class="metadata">
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="model-group">
-                <div class="model-title">Expert Furgon</div>
-                <ul class="price-list">
-                    <li class="price-list-item">
-                        <a href="../cenniky/cennik-expert-furgon.pdf" class="price-list-link" target="_blank">cennik-expert-furgon</a>
-                        <div class="metadata">
-                            <span class="badge price">From 23,540 €</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="make-section">
-            <div class="make-header">Toyota</div>
-            <div class="model-group">
-                <div class="model-title">ProAce</div>
-                <ul class="price-list">
-                    <li class="price-list-item">
-                        <a href="../cenniky/cennik_novy_proace (1).pdf" class="price-list-link" target="_blank">cennik_novy_proace</a>
-                        <div class="metadata">
-                            <span class="badge price">From 25,600 €</span>
-                        </div>
-                    </li>
-                    <li class="price-list-item">
-                        <a href="../cenniky/cennik_novy_proace.pdf" class="price-list-link" target="_blank">cennik_novy_proace</a>
-                        <div class="metadata">
-                            <span class="badge price">From 25,600 €</span>
-                        </div>
-                    </li>
-                    <li class="price-list-item">
-                        <a href="../cenniky/cennik_proace.pdf" class="price-list-link" target="_blank">cennik_proace</a>
-                        <div class="metadata">
-                            <span class="badge price">From 24,900 €</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="model-group">
-                <div class="model-title">ProAce Verso</div>
-                <ul class="price-list">
-                    <li class="price-list-item">
-                        <a href="../cenniky/cennik_novy_proace_verso.pdf" class="price-list-link" target="_blank">cennik_novy_proace_verso</a>
-                        <div class="metadata">
-                            <span class="badge price">From 36,300 €</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="model-group">
-                <div class="model-title">ProAce Verso EV</div>
-                <ul class="price-list">
-                    <li class="price-list-item">
-                        <a href="../cenniky/cennik_novy_proace_verso_ev.pdf" class="price-list-link" target="_blank">cennik_novy_proace_verso_ev</a>
-                        <div class="metadata">
-                            <span class="badge price">From 11,600 €</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="make-section">
-            <div class="make-header">Volkswagen</div>
-            <div class="model-group">
-                <div class="model-title">California</div>
-                <ul class="price-list">
-                    <li class="price-list-item">
-                        <a href="../cenniky/CaliforniaT7_MJ2026_01092025.pdf" class="price-list-link" target="_blank">CaliforniaT7_MJ2026_01092025</a>
-                        <div class="metadata">
-                            <span class="badge price">From 47,900 €</span>
-                            <span class="badge year">MY 2026</span>
-                            <span class="badge variant">T7</span>
-                            <span class="badge date">Valid from 01.09.2025</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="model-group">
-                <div class="model-title">Caravelle</div>
-                <ul class="price-list">
-                    <li class="price-list-item">
-                        <a href="../cenniky/Caravelle-T7_3.10.2025.pdf" class="price-list-link" target="_blank">Caravelle-T7_3.10.2025</a>
-                        <div class="metadata">
-                            <span class="badge price">From 55,719 €</span>
-                            <span class="badge variant">T7</span>
-                            <span class="badge date">Valid from 03.10.2025</span>
-                        </div>
-                    </li>
-                    <li class="price-list-item">
-                        <a href="../cenniky/CaravelleT7_MJ2025_01092025.pdf" class="price-list-link" target="_blank">CaravelleT7_MJ2025_01092025</a>
-                        <div class="metadata">
-                            <span class="badge price">From 55,719 €</span>
-                            <span class="badge year">MY 2025</span>
-                            <span class="badge variant">T7</span>
-                            <span class="badge date">Valid from 01.09.2025</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="model-group">
-                <div class="model-title">Multivan</div>
-                <ul class="price-list">
-                    <li class="price-list-item">
-                        <a href="../cenniky/MultivanT7_MJ2026_01092025 (1).pdf" class="price-list-link" target="_blank">MultivanT7_MJ2026_01092025</a>
-                        <div class="metadata">
-                            <span class="badge price">From 38,900 €</span>
-                            <span class="badge year">MY 2026</span>
-                            <span class="badge variant">T7</span>
-                            <span class="badge date">Valid from 01.09.2025</span>
-                        </div>
-                    </li>
-                    <li class="price-list-item">
-                        <a href="../cenniky/MultivanT7_MJ2026_01092025 (2).pdf" class="price-list-link" target="_blank">MultivanT7_MJ2026_01092025</a>
-                        <div class="metadata">
-                            <span class="badge price">From 38,900 €</span>
-                            <span class="badge year">MY 2026</span>
-                            <span class="badge variant">T7</span>
-                            <span class="badge date">Valid from 01.09.2025</span>
-                        </div>
-                    </li>
-                    <li class="price-list-item">
-                        <a href="../cenniky/MultivanT7_MJ2026_01092025.pdf" class="price-list-link" target="_blank">MultivanT7_MJ2026_01092025</a>
-                        <div class="metadata">
-                            <span class="badge price">From 38,900 €</span>
-                            <span class="badge year">MY 2026</span>
-                            <span class="badge variant">T7</span>
-                            <span class="badge date">Valid from 01.09.2025</span>
-                        </div>
-                    </li>
-                    <li class="price-list-item">
-                        <a href="../cenniky/mt7-mj2025-01012025.pdf" class="price-list-link" target="_blank">mt7-mj2025-01012025</a>
-                        <div class="metadata">
-                            <span class="badge price">From 32,490 €</span>
-                            <span class="badge year">MY 2025</span>
-                            <span class="badge variant">T7</span>
-                            <span class="badge date">Valid from 01.01.2025</span>
-                        </div>
-                    </li>
-                    <li class="price-list-item">
-                        <a href="../cenniky/multivant7-mj2025-16092024 (1).pdf" class="price-list-link" target="_blank">multivant7-mj2025-16092024</a>
-                        <div class="metadata">
-                            <span class="badge price">From 31,490 €</span>
-                            <span class="badge year">MY 2025</span>
-                            <span class="badge variant">T7</span>
-                            <span class="badge date">Valid from 16.09.2024</span>
-                        </div>
-                    </li>
-                    <li class="price-list-item">
-                        <a href="../cenniky/multivant7-mj2025-16092024.pdf" class="price-list-link" target="_blank">multivant7-mj2025-16092024</a>
-                        <div class="metadata">
-                            <span class="badge price">From 31,490 €</span>
-                            <span class="badge year">MY 2025</span>
-                            <span class="badge variant">T7</span>
-                            <span class="badge date">Valid from 16.09.2024</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="model-group">
-                <div class="model-title">Transporter</div>
-                <ul class="price-list">
-                    <li class="price-list-item">
-                        <a href="../cenniky/Transporter-T7_3.10.2025.pdf" class="price-list-link" target="_blank">Transporter-T7_3.10.2025</a>
-                        <div class="metadata">
-                            <span class="badge price">From 26,500 €</span>
-                            <span class="badge variant">T7</span>
-                            <span class="badge date">Valid from 03.10.2025</span>
-                        </div>
-                    </li>
-                    <li class="price-list-item">
-                        <a href="../cenniky/TransporterT7_MJ2025_01092025.pdf" class="price-list-link" target="_blank">TransporterT7_MJ2025_01092025</a>
-                        <div class="metadata">
-                            <span class="badge price">From 26,500 €</span>
-                            <span class="badge year">MY 2025</span>
-                            <span class="badge variant">T7</span>
-                            <span class="badge date">Valid from 01.09.2025</span>
-                        </div>
-                    </li>
-                    <li class="price-list-item">
-                        <a href="../cenniky/T7_Transporter_MJ2025_21052025.pdf" class="price-list-link" target="_blank">T7_Transporter_MJ2025_21052025</a>
-                        <div class="metadata">
-                            <span class="badge price">From 25,990 €</span>
-                            <span class="badge year">MY 2025</span>
-                            <span class="badge variant">T7</span>
-                            <span class="badge date">Valid from 21.05.2025</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+        <div id="error" class="error hidden">
         </div>
         
-        <div class="footer">
-            <p>Generated on October 31, 2025</p>
-            <p>This page lists all available van price lists from the cenniky folder.</p>
+        <div id="content" class="hidden">
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="stat-manufacturers">0</div>
+                    <div class="stat-label">Manufacturers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="stat-models">0</div>
+                    <div class="stat-label">Models</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="stat-pricelists">0</div>
+                    <div class="stat-label">Price Lists</div>
+                </div>
+            </div>
+            
+            <div id="manufacturers-container"></div>
+            
+            <div class="footer">
+                <p>Generated on <span id="generation-date"></span></p>
+                <p>This page lists all available van price lists from the cenniky folder.</p>
+            </div>
         </div>
     </div>
+
+    <script>
+        // Format price with thousand separators
+        function formatPrice(price) {
+            return price.toLocaleString('en-US');
+        }
+        
+        // Format date from YYYY-MM-DD to DD.MM.YYYY
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            try {
+                const [year, month, day] = dateStr.split('-');
+                return `${day}.${month}.${year}`;
+            } catch {
+                return dateStr;
+            }
+        }
+        
+        // Create badge HTML
+        function createBadge(className, text) {
+            return `<span class="badge ${className}">${text}</span>`;
+        }
+        
+        // Render the price lists
+        function renderPriceLists(data) {
+            const container = document.getElementById('manufacturers-container');
+            let html = '';
+            
+            data.manufacturers.forEach(manufacturer => {
+                html += `<div class="make-section">`;
+                html += `<div class="make-header">${manufacturer.name}</div>`;
+                
+                manufacturer.models.forEach(model => {
+                    html += `<div class="model-group">`;
+                    html += `<div class="model-title">${model.name}</div>`;
+                    html += `<ul class="price-list">`;
+                    
+                    model.priceLists.forEach(priceList => {
+                        html += `<li class="price-list-item">`;
+                        html += `<a href="../cenniky/${priceList.filename}" class="price-list-link" target="_blank">${priceList.basename}</a>`;
+                        html += `<div class="metadata">`;
+                        
+                        if (priceList.basePrice) {
+                            html += createBadge('price', `From ${formatPrice(priceList.basePrice)} €`);
+                        } else if (priceList.priceRange) {
+                            html += createBadge('price', priceList.priceRange);
+                        }
+                        
+                        if (priceList.modelYear) {
+                            html += createBadge('year', `MY ${priceList.modelYear}`);
+                        }
+                        
+                        if (priceList.variant) {
+                            html += createBadge('variant', priceList.variant);
+                        }
+                        
+                        if (priceList.validityDate) {
+                            html += createBadge('date', `Valid from ${formatDate(priceList.validityDate)}`);
+                        }
+                        
+                        html += `</div>`;
+                        html += `</li>`;
+                    });
+                    
+                    html += `</ul>`;
+                    html += `</div>`;
+                });
+                
+                html += `</div>`;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        // Load data from JSON file
+        async function loadData() {
+            try {
+                const response = await fetch('data.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load data');
+                }
+                const data = await response.json();
+                
+                // Update statistics
+                document.getElementById('stat-manufacturers').textContent = data.stats.totalManufacturers;
+                document.getElementById('stat-models').textContent = data.stats.totalModels;
+                document.getElementById('stat-pricelists').textContent = data.stats.totalPriceLists;
+                
+                // Update generation date
+                const now = new Date();
+                document.getElementById('generation-date').textContent = now.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                // Render price lists
+                renderPriceLists(data);
+                
+                // Show content, hide loading
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('content').classList.remove('hidden');
+                
+            } catch (err) {
+                document.getElementById('loading').classList.add('hidden');
+                const errorDiv = document.getElementById('error');
+                errorDiv.textContent = 'Error loading price list data: ' + err.message;
+                errorDiv.classList.remove('hidden');
+            }
+        }
+        
+        // Load data when page is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', loadData);
+        } else {
+            loadData();
+        }
+    </script>
 </body>
 </html>
