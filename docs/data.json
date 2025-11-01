@@ -9,51 +9,13 @@
             {
               "filename": "citroen_space_tourer.pdf",
               "basename": "citroen_space_tourer",
-              "basePrice": 35490,
-              "priceRange": "35,490 - 66,390 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": null,
               "variant": null,
               "validityDate": null,
-              "prices": [
-                35490,
-                36690,
-                38990,
-                39490,
-                40190,
-                40690,
-                42990,
-                44190,
-                46490,
-                46990,
-                47690,
-                47990,
-                48190,
-                49190,
-                49990,
-                50590,
-                51190,
-                51590,
-                52190,
-                53190,
-                54190,
-                54390,
-                55390,
-                57190,
-                57990,
-                58190,
-                58390,
-                58990,
-                59190,
-                59390,
-                60190,
-                64190,
-                65190,
-                65390,
-                66390
-              ],
-              "variants": [
-                "COMBI"
-              ]
+              "prices": [],
+              "variants": []
             }
           ]
         }
@@ -68,55 +30,13 @@
             {
               "filename": "Ford Transit Custom.pdf",
               "basename": "Ford Transit Custom",
-              "basePrice": 30790,
-              "priceRange": "30,790 - 50,910 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": null,
               "variant": null,
               "validityDate": null,
-              "prices": [
-                30790,
-                31590,
-                31690,
-                32490,
-                32690,
-                33290,
-                33690,
-                34190,
-                34290,
-                34490,
-                34990,
-                35190,
-                35990,
-                36490,
-                37490,
-                37872,
-                38590,
-                38856,
-                38979,
-                39390,
-                39963,
-                40209,
-                40390,
-                40947,
-                41390,
-                41439,
-                42054,
-                42177,
-                42423,
-                43038,
-                43284,
-                44268,
-                44883,
-                46113,
-                47466,
-                48450,
-                49680,
-                50910
-              ],
-              "variants": [
-                "Van",
-                "VAN"
-              ]
+              "prices": [],
+              "variants": []
             }
           ]
         }
@@ -131,21 +51,13 @@
             {
               "filename": "SK_Zafira_Vivaro_Combi.pdf",
               "basename": "SK_Zafira_Vivaro_Combi",
-              "basePrice": 37990,
-              "priceRange": "37,990 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": null,
               "variant": null,
               "validityDate": null,
-              "prices": [
-                37990
-              ],
-              "variants": [
-                "Premium",
-                "Edition",
-                "EDITION",
-                "COMBI",
-                "Combi"
-              ]
+              "prices": [],
+              "variants": []
             }
           ]
         },
@@ -155,60 +67,13 @@
             {
               "filename": "SK_Vivaro_VAN_CrewVan.pdf",
               "basename": "SK_Vivaro_VAN_CrewVan",
-              "basePrice": 22820,
-              "priceRange": "22,820 - 34,090 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": null,
               "variant": null,
               "validityDate": null,
-              "prices": [
-                22820,
-                23820,
-                24110,
-                24290,
-                25110,
-                25290,
-                25490,
-                25580,
-                25890,
-                26490,
-                26500,
-                26580,
-                26780,
-                26870,
-                26960,
-                27290,
-                27490,
-                27500,
-                27780,
-                27790,
-                27870,
-                27960,
-                28150,
-                28250,
-                28790,
-                28890,
-                29070,
-                29150,
-                29250,
-                29890,
-                30070,
-                30190,
-                30290,
-                30360,
-                30390,
-                31290,
-                31360,
-                31690,
-                31790,
-                32690,
-                34090
-              ],
-              "variants": [
-                "PREMIUM",
-                "Luxury",
-                "Van",
-                "CrewVan"
-              ]
+              "prices": [],
+              "variants": []
             }
           ]
         }
@@ -229,10 +94,7 @@
               "variant": null,
               "validityDate": null,
               "prices": [],
-              "variants": [
-                "COMBI",
-                "TRAVELLER"
-              ]
+              "variants": []
             }
           ]
         },
@@ -242,45 +104,13 @@
             {
               "filename": "cennik-expert-furgon.pdf",
               "basename": "cennik-expert-furgon",
-              "basePrice": 23540,
-              "priceRange": "23,540 - 33,790 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": null,
               "variant": null,
               "validityDate": null,
-              "prices": [
-                23540,
-                24830,
-                25010,
-                25590,
-                26210,
-                26300,
-                26990,
-                27190,
-                27220,
-                27500,
-                27590,
-                27680,
-                28490,
-                28510,
-                28590,
-                28880,
-                28970,
-                29590,
-                29800,
-                29890,
-                29990,
-                30090,
-                30990,
-                31090,
-                31390,
-                31490,
-                32390,
-                33790
-              ],
-              "variants": [
-                "FURGON",
-                "Furgon"
-              ]
+              "prices": [],
+              "variants": []
             }
           ]
         }
@@ -295,65 +125,35 @@
             {
               "filename": "cennik_novy_proace (1).pdf",
               "basename": "cennik_novy_proace",
-              "basePrice": 25600,
-              "priceRange": "25,600 - 30,300 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": null,
               "variant": null,
               "validityDate": null,
-              "prices": [
-                25600,
-                29300,
-                30300
-              ],
-              "variants": [
-                "ACTIVE",
-                "Active",
-                "COMFORT",
-                "Comfort",
-                "CREWCAB"
-              ]
+              "prices": [],
+              "variants": []
             },
             {
               "filename": "cennik_novy_proace.pdf",
               "basename": "cennik_novy_proace",
-              "basePrice": 25600,
-              "priceRange": "25,600 - 30,300 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": null,
               "variant": null,
               "validityDate": null,
-              "prices": [
-                25600,
-                29300,
-                30300
-              ],
-              "variants": [
-                "ACTIVE",
-                "Active",
-                "COMFORT",
-                "Comfort",
-                "CREWCAB"
-              ]
+              "prices": [],
+              "variants": []
             },
             {
               "filename": "cennik_proace.pdf",
               "basename": "cennik_proace",
-              "basePrice": 24900,
-              "priceRange": "24,900 - 28,900 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": null,
               "variant": null,
               "validityDate": null,
-              "prices": [
-                24900,
-                26960,
-                28900
-              ],
-              "variants": [
-                "Active",
-                "ACTIVE",
-                "Comfort",
-                "COMFORT",
-                "CrewCab"
-              ]
+              "prices": [],
+              "variants": []
             }
           ]
         },
@@ -363,19 +163,13 @@
             {
               "filename": "cennik_novy_proace_verso.pdf",
               "basename": "cennik_novy_proace_verso",
-              "basePrice": 36300,
-              "priceRange": "36,300 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": null,
               "variant": null,
               "validityDate": null,
-              "prices": [
-                36300
-              ],
-              "variants": [
-                "Comfort",
-                "COMBI",
-                "Combi"
-              ]
+              "prices": [],
+              "variants": []
             }
           ]
         },
@@ -385,18 +179,13 @@
             {
               "filename": "cennik_novy_proace_verso_ev.pdf",
               "basename": "cennik_novy_proace_verso_ev",
-              "basePrice": 11600,
-              "priceRange": "11,600 - 47,325 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": null,
               "variant": null,
               "validityDate": null,
-              "prices": [
-                11600,
-                47325
-              ],
-              "variants": [
-                "Comfort"
-              ]
+              "prices": [],
+              "variants": []
             }
           ]
         }
@@ -411,40 +200,13 @@
             {
               "filename": "CaliforniaT7_MJ2026_01092025.pdf",
               "basename": "CaliforniaT7_MJ2026_01092025",
-              "basePrice": 47900,
-              "priceRange": "47,900 - 85,362 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": "2026",
               "variant": "T7",
               "validityDate": "2025-09-01",
-              "prices": [
-                47900,
-                51000,
-                52200,
-                56700,
-                56900,
-                58200,
-                58917,
-                60900,
-                61000,
-                61800,
-                62730,
-                64206,
-                66100,
-                69400,
-                69741,
-                69987,
-                71586,
-                74907,
-                75030,
-                76014,
-                81303,
-                85362
-              ],
-              "variants": [
-                "Beach",
-                "Coast",
-                "Ocean"
-              ]
+              "prices": [],
+              "variants": []
             }
           ]
         },
@@ -454,27 +216,23 @@
             {
               "filename": "Caravelle-T7_3.10.2025.pdf",
               "basename": "Caravelle-T7_3.10.2025",
-              "basePrice": 55719,
-              "priceRange": "55,719 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": null,
               "variant": "T7",
               "validityDate": "2025-10-03",
-              "prices": [
-                55719
-              ],
+              "prices": [],
               "variants": []
             },
             {
               "filename": "CaravelleT7_MJ2025_01092025.pdf",
               "basename": "CaravelleT7_MJ2025_01092025",
-              "basePrice": 55719,
-              "priceRange": "55,719 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": "2025",
               "variant": "T7",
               "validityDate": "2025-09-01",
-              "prices": [
-                55719
-              ],
+              "prices": [],
               "variants": []
             }
           ]
@@ -485,209 +243,67 @@
             {
               "filename": "MultivanT7_MJ2026_01092025 (1).pdf",
               "basename": "MultivanT7_MJ2026_01092025",
-              "basePrice": 38900,
-              "priceRange": "38,900 - 74,169 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": "2026",
               "variant": "T7",
               "validityDate": "2025-09-01",
-              "prices": [
-                38900,
-                44800,
-                47847,
-                51100,
-                51700,
-                52400,
-                52500,
-                53000,
-                53300,
-                55104,
-                59000,
-                60300,
-                62853,
-                63591,
-                64452,
-                64575,
-                65190,
-                65559,
-                72570,
-                74169
-              ],
+              "prices": [],
               "variants": []
             },
             {
               "filename": "MultivanT7_MJ2026_01092025 (2).pdf",
               "basename": "MultivanT7_MJ2026_01092025",
-              "basePrice": 38900,
-              "priceRange": "38,900 - 74,169 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": "2026",
               "variant": "T7",
               "validityDate": "2025-09-01",
-              "prices": [
-                38900,
-                44800,
-                47847,
-                51100,
-                51700,
-                52400,
-                52500,
-                53000,
-                53300,
-                55104,
-                59000,
-                60300,
-                62853,
-                63591,
-                64452,
-                64575,
-                65190,
-                65559,
-                72570,
-                74169
-              ],
+              "prices": [],
               "variants": []
             },
             {
               "filename": "MultivanT7_MJ2026_01092025.pdf",
               "basename": "MultivanT7_MJ2026_01092025",
-              "basePrice": 38900,
-              "priceRange": "38,900 - 74,169 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": "2026",
               "variant": "T7",
               "validityDate": "2025-09-01",
-              "prices": [
-                38900,
-                44800,
-                47847,
-                51100,
-                51700,
-                52400,
-                52500,
-                53000,
-                53300,
-                55104,
-                59000,
-                60300,
-                62853,
-                63591,
-                64452,
-                64575,
-                65190,
-                65559,
-                72570,
-                74169
-              ],
+              "prices": [],
               "variants": []
             },
             {
               "filename": "mt7-mj2025-01012025.pdf",
               "basename": "mt7-mj2025-01012025",
-              "basePrice": 32490,
-              "priceRange": "32,490 - 58,720 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": "2025",
               "variant": "T7",
               "validityDate": "2025-01-01",
-              "prices": [
-                32490,
-                33490,
-                38600,
-                39880,
-                40090,
-                41380,
-                41740,
-                42690,
-                43030,
-                43980,
-                48180,
-                49020,
-                49540,
-                49820,
-                50330,
-                50850,
-                51000,
-                51840,
-                57410,
-                58720
-              ],
+              "prices": [],
               "variants": []
             },
             {
               "filename": "multivant7-mj2025-16092024 (1).pdf",
               "basename": "multivant7-mj2025-16092024",
-              "basePrice": 31490,
-              "priceRange": "31,490 - 60,828 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": "2025",
               "variant": "T7",
               "validityDate": "2024-09-16",
-              "prices": [
-                31490,
-                32490,
-                37788,
-                38600,
-                38988,
-                39880,
-                40090,
-                41380,
-                41740,
-                42690,
-                43030,
-                43980,
-                46320,
-                47856,
-                48108,
-                48890,
-                49400,
-                49656,
-                50088,
-                50180,
-                50690,
-                51228,
-                51636,
-                52776,
-                58668,
-                59280,
-                60216,
-                60828
-              ],
+              "prices": [],
               "variants": []
             },
             {
               "filename": "multivant7-mj2025-16092024.pdf",
               "basename": "multivant7-mj2025-16092024",
-              "basePrice": 31490,
-              "priceRange": "31,490 - 60,828 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": "2025",
               "variant": "T7",
               "validityDate": "2024-09-16",
-              "prices": [
-                31490,
-                32490,
-                37788,
-                38600,
-                38988,
-                39880,
-                40090,
-                41380,
-                41740,
-                42690,
-                43030,
-                43980,
-                46320,
-                47856,
-                48108,
-                48890,
-                49400,
-                49656,
-                50088,
-                50180,
-                50690,
-                51228,
-                51636,
-                52776,
-                58668,
-                59280,
-                60216,
-                60828
-              ],
+              "prices": [],
               "variants": []
             }
           ]
@@ -698,107 +314,34 @@
             {
               "filename": "Transporter-T7_3.10.2025.pdf",
               "basename": "Transporter-T7_3.10.2025",
-              "basePrice": 26500,
-              "priceRange": "26,500 - 49,569 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": null,
               "variant": "T7",
               "validityDate": "2025-10-03",
-              "prices": [
-                26500,
-                27500,
-                32595,
-                33300,
-                33825,
-                33900,
-                35000,
-                35600,
-                36400,
-                37000,
-                37300,
-                37900,
-                38800,
-                39400,
-                39700,
-                40300,
-                40959,
-                41697,
-                43050,
-                43788,
-                44772,
-                45510,
-                45879,
-                46617,
-                47724,
-                48462,
-                48831,
-                49569
-              ],
+              "prices": [],
               "variants": []
             },
             {
               "filename": "TransporterT7_MJ2025_01092025.pdf",
               "basename": "TransporterT7_MJ2025_01092025",
-              "basePrice": 26500,
-              "priceRange": "26,500 - 49,569 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": "2025",
               "variant": "T7",
               "validityDate": "2025-09-01",
-              "prices": [
-                26500,
-                27500,
-                32595,
-                33300,
-                33825,
-                33900,
-                35000,
-                35600,
-                36400,
-                37000,
-                37300,
-                37900,
-                38800,
-                39400,
-                39700,
-                40300,
-                40959,
-                41697,
-                43050,
-                43788,
-                44772,
-                45510,
-                45879,
-                46617,
-                47724,
-                48462,
-                48831,
-                49569
-              ],
+              "prices": [],
               "variants": []
             },
             {
               "filename": "T7_Transporter_MJ2025_21052025.pdf",
               "basename": "T7_Transporter_MJ2025_21052025",
-              "basePrice": 25990,
-              "priceRange": "25,990 - 39,670 €",
+              "basePrice": null,
+              "priceRange": null,
               "modelYear": "2025",
               "variant": "T7",
               "validityDate": "2025-05-21",
-              "prices": [
-                25990,
-                26990,
-                32720,
-                33340,
-                34420,
-                35030,
-                35810,
-                36420,
-                36680,
-                37290,
-                38190,
-                38800,
-                39060,
-                39670
-              ],
+              "prices": [],
               "variants": []
             }
           ]

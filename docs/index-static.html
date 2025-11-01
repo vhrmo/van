@@ -13,62 +13,63 @@
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
+            line-height: 1.4;
             color: #333;
             background: #f5f5f5;
-            padding: 20px;
+            padding: 10px;
+            font-size: 14px;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
         }
         
         h1 {
             color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 2.5em;
-            border-bottom: 3px solid #3498db;
-            padding-bottom: 15px;
+            margin-bottom: 5px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 8px;
         }
         
         .subtitle {
             color: #7f8c8d;
-            margin-bottom: 30px;
-            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-size: 0.9em;
         }
         
         .make-section {
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
         
         .make-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 15px 20px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            font-size: 1.8em;
+            padding: 8px 12px;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
             font-weight: bold;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.15);
         }
         
         .model-group {
-            margin-bottom: 25px;
+            margin-bottom: 12px;
             background: #fafafa;
-            border-left: 4px solid #3498db;
-            padding: 20px;
-            border-radius: 4px;
+            border-left: 3px solid #3498db;
+            padding: 10px;
+            border-radius: 2px;
         }
         
         .model-title {
-            font-size: 1.5em;
+            font-size: 1.1em;
             color: #2c3e50;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             font-weight: 600;
         }
         
@@ -78,20 +79,21 @@
         
         .price-list-item {
             background: white;
-            padding: 15px 20px;
-            margin-bottom: 10px;
-            border-radius: 4px;
+            padding: 6px 10px;
+            margin-bottom: 4px;
+            border-radius: 2px;
             border: 1px solid #e0e0e0;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 10px;
         }
         
         .price-list-item:hover {
             border-color: #3498db;
-            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
-            transform: translateY(-2px);
+            box-shadow: 0 1px 4px rgba(52, 152, 219, 0.2);
+            transform: translateY(-1px);
         }
         
         .price-list-link {
@@ -99,6 +101,7 @@
             text-decoration: none;
             font-weight: 500;
             flex-grow: 1;
+            font-size: 0.9em;
         }
         
         .price-list-link:hover {
@@ -108,23 +111,25 @@
         
         .metadata {
             display: flex;
-            gap: 15px;
+            gap: 8px;
             color: #7f8c8d;
-            font-size: 0.9em;
+            font-size: 0.85em;
+            flex-wrap: wrap;
         }
         
         .metadata-item {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
         }
         
         .badge {
             background: #ecf0f1;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.85em;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-size: 0.8em;
             font-weight: 500;
+            white-space: nowrap;
         }
         
         .badge.year {
@@ -149,19 +154,19 @@
         }
         
         .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #ecf0f1;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ecf0f1;
             text-align: center;
             color: #7f8c8d;
-            font-size: 0.9em;
+            font-size: 0.8em;
         }
         
         .stats {
             background: #ecf0f1;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 30px;
+            padding: 8px;
+            border-radius: 3px;
+            margin-bottom: 15px;
             display: flex;
             justify-content: space-around;
             text-align: center;
@@ -172,16 +177,16 @@
         }
         
         .stat-number {
-            font-size: 2em;
+            font-size: 1.4em;
             font-weight: bold;
             color: #3498db;
         }
         
         .stat-label {
             color: #7f8c8d;
-            font-size: 0.9em;
+            font-size: 0.75em;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -213,7 +218,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/citroen_space_tourer.pdf" class="price-list-link" target="_blank">citroen_space_tourer</a>
                         <div class="metadata">
-                            <span class="badge price">From 35,490 €</span>
                         </div>
                     </li>
                 </ul>
@@ -227,7 +231,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/Ford Transit Custom.pdf" class="price-list-link" target="_blank">Ford Transit Custom</a>
                         <div class="metadata">
-                            <span class="badge price">From 30,790 €</span>
                         </div>
                     </li>
                 </ul>
@@ -241,7 +244,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/SK_Zafira_Vivaro_Combi.pdf" class="price-list-link" target="_blank">SK_Zafira_Vivaro_Combi</a>
                         <div class="metadata">
-                            <span class="badge price">From 37,990 €</span>
                         </div>
                     </li>
                 </ul>
@@ -252,7 +254,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/SK_Vivaro_VAN_CrewVan.pdf" class="price-list-link" target="_blank">SK_Vivaro_VAN_CrewVan</a>
                         <div class="metadata">
-                            <span class="badge price">From 22,820 €</span>
                         </div>
                     </li>
                 </ul>
@@ -276,7 +277,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/cennik-expert-furgon.pdf" class="price-list-link" target="_blank">cennik-expert-furgon</a>
                         <div class="metadata">
-                            <span class="badge price">From 23,540 €</span>
                         </div>
                     </li>
                 </ul>
@@ -290,19 +290,16 @@
                     <li class="price-list-item">
                         <a href="../cenniky/cennik_novy_proace (1).pdf" class="price-list-link" target="_blank">cennik_novy_proace</a>
                         <div class="metadata">
-                            <span class="badge price">From 25,600 €</span>
                         </div>
                     </li>
                     <li class="price-list-item">
                         <a href="../cenniky/cennik_novy_proace.pdf" class="price-list-link" target="_blank">cennik_novy_proace</a>
                         <div class="metadata">
-                            <span class="badge price">From 25,600 €</span>
                         </div>
                     </li>
                     <li class="price-list-item">
                         <a href="../cenniky/cennik_proace.pdf" class="price-list-link" target="_blank">cennik_proace</a>
                         <div class="metadata">
-                            <span class="badge price">From 24,900 €</span>
                         </div>
                     </li>
                 </ul>
@@ -313,7 +310,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/cennik_novy_proace_verso.pdf" class="price-list-link" target="_blank">cennik_novy_proace_verso</a>
                         <div class="metadata">
-                            <span class="badge price">From 36,300 €</span>
                         </div>
                     </li>
                 </ul>
@@ -324,7 +320,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/cennik_novy_proace_verso_ev.pdf" class="price-list-link" target="_blank">cennik_novy_proace_verso_ev</a>
                         <div class="metadata">
-                            <span class="badge price">From 11,600 €</span>
                         </div>
                     </li>
                 </ul>
@@ -338,7 +333,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/CaliforniaT7_MJ2026_01092025.pdf" class="price-list-link" target="_blank">CaliforniaT7_MJ2026_01092025</a>
                         <div class="metadata">
-                            <span class="badge price">From 47,900 €</span>
                             <span class="badge year">MY 2026</span>
                             <span class="badge variant">T7</span>
                             <span class="badge date">Valid from 01.09.2025</span>
@@ -352,7 +346,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/Caravelle-T7_3.10.2025.pdf" class="price-list-link" target="_blank">Caravelle-T7_3.10.2025</a>
                         <div class="metadata">
-                            <span class="badge price">From 55,719 €</span>
                             <span class="badge variant">T7</span>
                             <span class="badge date">Valid from 03.10.2025</span>
                         </div>
@@ -360,7 +353,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/CaravelleT7_MJ2025_01092025.pdf" class="price-list-link" target="_blank">CaravelleT7_MJ2025_01092025</a>
                         <div class="metadata">
-                            <span class="badge price">From 55,719 €</span>
                             <span class="badge year">MY 2025</span>
                             <span class="badge variant">T7</span>
                             <span class="badge date">Valid from 01.09.2025</span>
@@ -374,7 +366,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/MultivanT7_MJ2026_01092025 (1).pdf" class="price-list-link" target="_blank">MultivanT7_MJ2026_01092025</a>
                         <div class="metadata">
-                            <span class="badge price">From 38,900 €</span>
                             <span class="badge year">MY 2026</span>
                             <span class="badge variant">T7</span>
                             <span class="badge date">Valid from 01.09.2025</span>
@@ -383,7 +374,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/MultivanT7_MJ2026_01092025 (2).pdf" class="price-list-link" target="_blank">MultivanT7_MJ2026_01092025</a>
                         <div class="metadata">
-                            <span class="badge price">From 38,900 €</span>
                             <span class="badge year">MY 2026</span>
                             <span class="badge variant">T7</span>
                             <span class="badge date">Valid from 01.09.2025</span>
@@ -392,7 +382,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/MultivanT7_MJ2026_01092025.pdf" class="price-list-link" target="_blank">MultivanT7_MJ2026_01092025</a>
                         <div class="metadata">
-                            <span class="badge price">From 38,900 €</span>
                             <span class="badge year">MY 2026</span>
                             <span class="badge variant">T7</span>
                             <span class="badge date">Valid from 01.09.2025</span>
@@ -401,7 +390,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/mt7-mj2025-01012025.pdf" class="price-list-link" target="_blank">mt7-mj2025-01012025</a>
                         <div class="metadata">
-                            <span class="badge price">From 32,490 €</span>
                             <span class="badge year">MY 2025</span>
                             <span class="badge variant">T7</span>
                             <span class="badge date">Valid from 01.01.2025</span>
@@ -410,7 +398,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/multivant7-mj2025-16092024 (1).pdf" class="price-list-link" target="_blank">multivant7-mj2025-16092024</a>
                         <div class="metadata">
-                            <span class="badge price">From 31,490 €</span>
                             <span class="badge year">MY 2025</span>
                             <span class="badge variant">T7</span>
                             <span class="badge date">Valid from 16.09.2024</span>
@@ -419,7 +406,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/multivant7-mj2025-16092024.pdf" class="price-list-link" target="_blank">multivant7-mj2025-16092024</a>
                         <div class="metadata">
-                            <span class="badge price">From 31,490 €</span>
                             <span class="badge year">MY 2025</span>
                             <span class="badge variant">T7</span>
                             <span class="badge date">Valid from 16.09.2024</span>
@@ -433,7 +419,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/Transporter-T7_3.10.2025.pdf" class="price-list-link" target="_blank">Transporter-T7_3.10.2025</a>
                         <div class="metadata">
-                            <span class="badge price">From 26,500 €</span>
                             <span class="badge variant">T7</span>
                             <span class="badge date">Valid from 03.10.2025</span>
                         </div>
@@ -441,7 +426,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/TransporterT7_MJ2025_01092025.pdf" class="price-list-link" target="_blank">TransporterT7_MJ2025_01092025</a>
                         <div class="metadata">
-                            <span class="badge price">From 26,500 €</span>
                             <span class="badge year">MY 2025</span>
                             <span class="badge variant">T7</span>
                             <span class="badge date">Valid from 01.09.2025</span>
@@ -450,7 +434,6 @@
                     <li class="price-list-item">
                         <a href="../cenniky/T7_Transporter_MJ2025_21052025.pdf" class="price-list-link" target="_blank">T7_Transporter_MJ2025_21052025</a>
                         <div class="metadata">
-                            <span class="badge price">From 25,990 €</span>
                             <span class="badge year">MY 2025</span>
                             <span class="badge variant">T7</span>
                             <span class="badge date">Valid from 21.05.2025</span>
